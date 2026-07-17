@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -13,10 +14,25 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
-    })
+        $middleware->alias([
+            'role'=>RoleMiddleware::class
+        ]);
+    }) //It tells laravel when where you see role, execute RoleMiddleware.
+    
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
     })->create();
+
+    Route::middleware(['auth:sanctum', 'role:candidate'])->group(function () {
+        // Candidate routes
+    });
+
+    Route::middleware(['auth:sanctum', 'role:employer'])->group(function () {
+        // Employer routes
+    });
+
+    Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+        // Admin routes
+    });

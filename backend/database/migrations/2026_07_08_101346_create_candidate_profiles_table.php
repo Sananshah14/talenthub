@@ -14,34 +14,35 @@ return new class extends Migration
         Schema::create('candidate_profiles', function (Blueprint $table) {
             $table->id();
 
-$table->foreignId('user_id')
-    ->constrained()
-    ->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->unique()
+                ->constrained()
+                ->cascadeOnDelete();
 
-$table->string('phone',30)->nullable();
-$table->date('date_of_birth')->nullable();
+            $table->string('phone',30)->nullable();
+            $table->date('date_of_birth')->nullable();
 
-$table->string('country',100)->nullable();
-$table->string('city',100)->nullable();
+            $table->string('country',100)->nullable();
+            $table->string('city',100)->nullable();
 
-$table->string('headline',150)->nullable();
-$table->text('bio')->nullable();
+            $table->string('headline',150)->nullable();
+            $table->text('bio')->nullable();
 
-$table->string('github_url')->nullable();
-$table->string('linkedin_url')->nullable();
-$table->string('portfolio_url')->nullable();
+            $table->string('github_url')->nullable();
+            $table->string('linkedin_url')->nullable();
+            $table->string('portfolio_url')->nullable();
 
-$table->string('resume_path')->nullable();
+            $table->string('resume_path')->nullable();
 
-$table->timestamps();
-        });
-    }
+            $table->timestamps();
+                    });
+                }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('candidate_profiles');
-    }
+            /**
+             * Reverse the migrations.
+             */
+            public function down(): void
+            {
+                Schema::dropIfExists('candidate_profiles');
+            }
 };
