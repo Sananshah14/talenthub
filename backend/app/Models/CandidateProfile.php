@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Application;
+use App\Models\SavedJob;
+use App\Models\Skill;
 
 class CandidateProfile extends Model
 {
@@ -12,25 +17,27 @@ class CandidateProfile extends Model
     protected $fillable =[
         'user_id',
 
-'phone',
+        'phone',
 
-'date_of_birth',
+        'date_of_birth',
 
-'country',
+        'country',
 
-'city',
+        'city',
 
-'headline',
+        'headline',
 
-'bio',
+        'bio',
 
-'github_url',
+        'github_url',
 
-'linkedin_url',
+        'linkedin_url',
 
-'portfolio_url',
+        'portfolio_url',
 
-'resume_path'
+        'resume_path',
+
+        'avatar_path',
     ];
 
     public function user(){
@@ -61,6 +68,6 @@ class CandidateProfile extends Model
         return $this->belongsToMany(
             Skill::class,
             'candidate_skills'
-        );
+        )->withTimestamps();
     }
 }

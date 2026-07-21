@@ -24,14 +24,26 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('candidate')->
     middleware(['auth:sanctum', 'role:candidate'])->
     group(function(){
-        Route::get('/dashboard', function(){return response()->json([
-                    'message' => 'Welcome Candidate!'
-                ]); });
+        
 
         Route::post('/profile', [CandidateProfileController::class, 'store']);
         Route::get('/profile', [CandidateProfileController::class, 'show']);
         Route::put('/profile', [CandidateProfileController::class, 'update']);
-
+        Route::post('/resume', [CandidateProfileController::class, 'uploadResume']);
+        Route::post('/avatar', [CandidateProfileController::class, 'uploadAvatar']);
+        Route::get('/education', [CandidateProfileController::class, 'indexEducation']);
+        Route::post('/education', [CandidateProfileController::class, 'storeEducation']);
+        Route::put('/education/{id}', [CandidateProfileController::class, 'updateEducation']);
+        Route::delete('/education/{id}', [CandidateProfileController::class, 'deleteEducation']);
+        Route::post('/experience', [CandidateProfileController::class, 'storeExperience']);
+        Route::get('/experience', [CandidateProfileController::class, 'indexExperience']);
+        Route::put('/experience/{id}', [CandidateProfileController::class, 'updateExperience']);
+        Route::delete('/experience/{id}', [CandidateProfileController::class, 'deleteExperience']);
+        Route::get('/skills', [CandidateProfileController::class, 'indexSkills']);
+        Route::post('/skills', [CandidateProfileController::class, 'storeSkills']);
+        Route::put('/skills', [CandidateProfileController::class, 'updateSkills']);
+        Route::delete('/skills/{skillId}', [CandidateProfileController::class, 'deleteSkill']);
+        Route::get('/dashboard', [CandidateProfileController::class, 'dashboard']);
 });
 
 //Employer Routes

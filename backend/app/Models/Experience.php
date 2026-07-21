@@ -16,6 +16,7 @@ class Experience extends Model
         'start_date',
         'end_date',
         'currently_working',
+        'location',
         'description',
     ];
 

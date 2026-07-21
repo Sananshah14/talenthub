@@ -14,23 +14,23 @@ return new class extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
 
-$table->foreignId('candidate_profile_id')
-    ->constrained()
-    ->cascadeOnDelete();
+        $table->foreignId('candidate_profile_id')
+            ->constrained()
+            ->cascadeOnDelete();
 
-$table->string('company_name',150);
+        $table->string('company_name',150);
 
-$table->string('job_title',150);
+        $table->string('job_title',150);
 
-$table->date('start_date');
+        $table->date('start_date');
 
-$table->date('end_date')->nullable();
+        $table->date('end_date')->nullable();
 
-$table->boolean('currently_working')->default(false);
+        $table->boolean('currently_working')->default(false);
 
-$table->text('description')->nullable();
+        $table->text('description')->nullable();
 
-$table->timestamps();
+        $table->timestamps();
         });
     }
 
